@@ -1,0 +1,28 @@
+.periodDisplay-box {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	margin: 1rem auto;
+	list-style-type: none;
+	padding: 0;
+}
+
+.periodDisplay-box li {
+	margin: 0;
+	padding: 0 0.5rem;
+}
+
+.point,
+.point-active {
+	border: 1px solid #000;
+	background-color: #ccc;
+	width: 0.5rem;
+	min-height: 0.5rem;
+	border-radius: 50%;
+}
+
+.point-active {
+	background-color: #00af46;
+}
