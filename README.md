@@ -1,5 +1,6 @@
+#React Pomodoro Timer application
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can view live demo over at : https://sergzu.github.io/Pomodoro-timer/
 
-This is Pomodoro Timer application using React.js 
 
-Application demo avalible here : https://sergzu.github.io/Pomodoro-timer/
