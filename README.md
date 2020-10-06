@@ -2,4 +2,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This is Pomodoro Timer application using React.js 
 
-Application demo avalible here : https://codepen.io/SergZu/full/OJNeYXE
+Application demo avalible here : https://sergzu.github.io/Pomodoro-timer/
