@@ -12,19 +12,29 @@ class App extends React.Component {
     super(props);
     this.state = {
       ...timeBorders,
-      ...initData
+      ...initData,
+      timestamp : null
     }
   }
 
 
-  componentWillUnmout = () => {
+  componentWillUnmount = () => {
     if (this.state.timerId) clearInterval(this.state.timerId)
   }
 
   tick = () => {
+    let value;
+    if (this.state.timestamp) {  
+      const currentTimestamp = Date.now();
+      // Additional check if interval between calls is bigger than 1s
+      const timeDiff = currentTimestamp - this.state.timestamp;
+      value = (timeDiff > 1050) ? Math.round(timeDiff / 1000) : 1;
+    }
+    else value = 1;
     this.setState( (state) => {
       return {
-        currentTime : state.currentTime - 1
+        currentTime: state.currentTime - value,
+        timestamp: Date.now()
       }
     } )
   }
@@ -33,7 +43,8 @@ class App extends React.Component {
     clearInterval(this.state.timerId);
     this.setState({ 
       timerId : '',
-      isPaused : true
+      isPaused : true,
+      timestamp : null
     })
   } 
 
@@ -46,7 +57,7 @@ class App extends React.Component {
 
   reset = () => {
     if (!!this.state.timerId) clearInterval(this.state.timerId);
-    this.setState({...initData});
+    this.setState({...initData, timestamp : null});
   }
 
   changePeriodTime = (periodName, value) => {
@@ -65,7 +76,8 @@ class App extends React.Component {
         currentTime : periodName === 'sessionTime' ? newValue : state.sessionTime,
         timerId : '',
         isPaused : false,
-        currentPeriod : 1
+        currentPeriod : 1,
+        timestamp : null
       }
     } )
 
@@ -76,7 +88,7 @@ class App extends React.Component {
     if (this.state.currentPeriod === this.state.maxPeriods) {
       if (startAfter) beepCreator();
       this.setState((state) => {
-        return {currentPeriod : 1, currentTime : state.sessionTime} 
+        return {currentPeriod : 1, currentTime : state.sessionTime, timestamp : null} 
       });
       return null;
     }
@@ -91,7 +103,8 @@ class App extends React.Component {
           const isOddPeriod = !!(state.currentPeriod % 2);
           return {
             currentPeriod : state.currentPeriod + value,
-            currentTime : isOddPeriod ? state.breakTime : state.sessionTime
+            currentTime : isOddPeriod ? state.breakTime : state.sessionTime,
+            timestamp : null
           }
         } );
         if (startAfter) this.onStartHandler();
@@ -107,10 +120,13 @@ class App extends React.Component {
                 timerId : '',
                 isPaused : false,
                 currentPeriod : 1,
-                currentTime : state.sessionTime
+                currentTime : state.sessionTime,
+                timestamp : null
               }
      });
   }
+
+  // Event handlers
 
   onStartHandler = () => {
     if (!!this.state.timerId && !this.state.isPaused) return null;
@@ -120,7 +136,9 @@ class App extends React.Component {
         this.setState({ timerId : '' });
         this.periodSwitch(false, 4000, true);
       }
-      else this.tick()
+      else {
+        this.tick()
+      }
     }, 1000 )
     this.runTimer(timer);
   }

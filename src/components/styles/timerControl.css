@@ -43,3 +43,14 @@
 	font-size: 1.75em;
 	font-weight: bold;
 }
+
+@media screen and (max-width: 600px) {
+	.control-panel-btn {
+		display: flex;
+	}
+	.control-panel-btn span  {
+		margin: auto;
+		line-height: 100%;
+		font-size: 1.5rem;
+	}
+}
