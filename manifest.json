@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Pomodoro Timer",
+  "name": "Pomodoro Timer App",
+  "description": "Simple Pomodoro Timer React app created with CRA tool",
   "icons": [
     {
       "src": "favicon.ico",
@@ -21,5 +22,6 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
+  "orientation": "portrait",
   "background_color": "#ffffff"
 }
